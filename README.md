@@ -6,4 +6,5 @@ utilisation de :
     matplotlib
       pyplot
   qtcreator
-    serialink
+    qdebug
+    seriallink
