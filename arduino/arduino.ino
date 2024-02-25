@@ -1,40 +1,39 @@
-/***************************************************************************
-  This is a library for the BMP280 humidity, temperature & pressure sensor
-
-  Designed specifically to work with the Adafruit BMEP280 Breakout
-  ----> http://www.adafruit.com/products/2651
-
-  These sensors use I2C or SPI to communicate, 2 or 4 pins are required
-  to interface.
-
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit andopen-source hardware by purchasing products
-  from Adafruit!
-
-  Written by Limor Fried & Kevin Townsend for Adafruit Industries.
-  BSD license, all text above must be included in any redistribution
- ***************************************************************************/
-
+// Importation des librairies
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP280.h>
 
-#define BMP_SCK 13
-#define BMP_MISO 12
-#define BMP_MOSI 11
-#define BMP_CS 10
+const int BMP_SCK = 13;
+const int BMP_MISO = 12;
+const int BMP_MOSI = 11;
+const int BMP_CS = 10;
 
 Adafruit_BMP280 bmp; // I2C
 //Adafruit_BMP280 bmp(BMP_CS); // hardware SPI
 //Adafruit_BMP280 bmp(BMP_CS, BMP_MOSI, BMP_MISO,  BMP_SCK);
 
-float temperatureSenKy052;
-float pressionSenKy052;
+
+// Définition des pins
+const int pinDist = 3;
+
+
+// Variables utiles
 float thermistance;
+float potentiometreLineaire;
+float capteurDistance;
+float capteurPression;
+float pressionSenKy052;
+float temperatureSenKy052;
+int continuer = 1;
 
 void setup() {
-  Serial.begin(9600);
+  // initalistaion des pins
+  pinMode(pinDist, INPUT);
+
+  Serial.begin(9600); // Ouverture du moniteur série
+
+  // code géré par la librairie
   Serial.println(F("BMP280 test"));
 
   if (!bmp.begin()) {
@@ -44,16 +43,30 @@ void setup() {
 }
 
 void loop() {
-  temperatureSenKy052 = bmp.readTemperature();
-  pressionSenKy052 = bmp.readPressure();
+  // Récupératon des données par les capteurs
   thermistance = 68.8 - (0.0865*analogRead(A0));
+  potentiometreLineaire = analogRead(A1);
+  capteurDistance = digitalRead(pinDist);
+  capteurPression = analogRead(A2);
+  pressionSenKy052 = bmp.readPressure();
+  temperatureSenKy052 = bmp.readTemperature();
 
-  // temperature capteur SEN-KY052;pression capteur SEN-KY052;temperature thermistance
-  Serial.print(temperatureSenKy052);
+
+  // Affichage des données dans le moniteur série
+  // Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);continuer
+  Serial.print(thermistance);
+  Serial.print(";");
+  Serial.print(potentiometreLineaire);
+  Serial.print(";");
+  Serial.print(capteurDistance);
+  Serial.print(";");
+  Serial.print(capteurPression);
   Serial.print(";");
   Serial.print(pressionSenKy052);
   Serial.print(";");
-  Serial.println(thermistance);
+  Serial.print(temperatureSenKy052);
+  Serial.print(";");
+  Serial.println(continuer);
 
-  delay(1000);
+  delay(1000); // Toutes les secondes
 }
