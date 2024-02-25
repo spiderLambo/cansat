@@ -12,6 +12,7 @@ public:
     explicit seriallink(QObject *parent = nullptr);
     ~seriallink();
 
+    // liste des methodes utilisées
     void openConnection();
     void closeConnection();
     void write(const char* messageToWrite);

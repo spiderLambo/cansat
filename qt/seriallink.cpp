@@ -20,12 +20,12 @@ seriallink::~seriallink(){
 
 void seriallink::openConnection(){
     if(!_serial.open(QIODevice::ReadWrite))
-        qDebug() <<"connection impossible";
+        qDebug() <<"connexion impossible";
 
-    else qDebug() <<"connextion ok";
+    else qDebug() <<"connexion ok";
 }
 
-void seriallink::write(const char *messageToWrite){
+void seriallink::write(const char* messageToWrite){
     _serial.write(messageToWrite);
 }
 

@@ -22,13 +22,9 @@ public slots:
     void updateGUI(QByteArray data);
 
 private slots:
-    void on_p_ledOn_clicked();
+    void on_stopTransmition_clicked();
 
-    void on_p_ledOff_clicked();
-
-    void on_arreter_clicked();
-
-    void on_arreter_clicked(bool checked);
+    void on_servomoteur_clicked();
 
 private:
     Ui::MainWindow *ui;

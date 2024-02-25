@@ -20,10 +20,7 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-TRANSLATIONS += \
-    qt_en_150.ts
-CONFIG += lrelease
-CONFIG += embed_translations
+TARGET = cansat
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

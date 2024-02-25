@@ -19,17 +19,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateGUI(QByteArray data){
-    ui->lc_byte_received->display(ui->lc_byte_received->value() + data.size());
-}
-
-
-void MainWindow::on_arreter_clicked()
+void MainWindow::on_stopTransmition_clicked()
 {
     if (arduino->isWritable())
         arduino->write("s");
 
     else
         qDebug() << "Couldn't write to serial";
+
+}
+
+
+void MainWindow::on_servomoteur_clicked()
+{
+    if (arduino->isWritable())
+        arduino->write("s");
+
+    else
+        qDebug() << "Couldn't write to serial";
+
 }
 

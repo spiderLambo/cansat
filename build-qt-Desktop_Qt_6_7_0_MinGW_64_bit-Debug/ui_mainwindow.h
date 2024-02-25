@@ -23,7 +23,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QPushButton *arreter;
+    QPushButton *stopTransmition;
+    QPushButton *servomoteur;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -34,9 +35,12 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        arreter = new QPushButton(centralwidget);
-        arreter->setObjectName("arreter");
-        arreter->setGeometry(QRect(150, 130, 221, 61));
+        stopTransmition = new QPushButton(centralwidget);
+        stopTransmition->setObjectName("stopTransmition");
+        stopTransmition->setGeometry(QRect(50, 70, 171, 51));
+        servomoteur = new QPushButton(centralwidget);
+        servomoteur->setObjectName("servomoteur");
+        servomoteur->setGeometry(QRect(260, 70, 171, 51));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -54,7 +58,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        arreter->setText(QCoreApplication::translate("MainWindow", "arreter", nullptr));
+        stopTransmition->setText(QCoreApplication::translate("MainWindow", "Arr\303\252ter la transmition", nullptr));
+        servomoteur->setText(QCoreApplication::translate("MainWindow", "Activer le servomoteur", nullptr));
     } // retranslateUi
 
 };
