@@ -2,8 +2,7 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -26,17 +25,13 @@ void MainWindow::on_stopTransmition_clicked()
 
     else
         qDebug() << "Couldn't write to serial";
-
 }
-
 
 void MainWindow::on_servomoteur_clicked()
 {
     if (arduino->isWritable())
-        arduino->write("s");
+        arduino->write("o");
 
     else
         qDebug() << "Couldn't write to serial";
-
 }
-

@@ -43,6 +43,21 @@ void setup() {
 }
 
 void loop() {
+  while(Serial.available()) {
+    data = Serial.read();
+
+    switch(data) {
+      case 's':
+        stopData();
+      case 'o':
+        servomoteur();
+    }
+
+    codePrincipal();
+  }
+}
+
+void codePrincipal(){
   // Récupératon des données par les capteurs
   thermistance = 68.8 - (0.0865*analogRead(A0));
   potentiometreLineaire = analogRead(A1);
@@ -69,4 +84,12 @@ void loop() {
   Serial.println(continuer);
 
   delay(1000); // Toutes les secondes
+}
+
+void stopData(){
+  continuer = 0;
+}
+
+void servomoteur(){
+  // code du servomoteur ici
 }
