@@ -26,6 +26,10 @@ private slots:
 
     void on_p_ledOff_clicked();
 
+    void on_arreter_clicked();
+
+    void on_arreter_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 
