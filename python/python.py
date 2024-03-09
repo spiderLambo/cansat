@@ -62,12 +62,16 @@ while continuer:
     )
 
     # messages d'erreur
-    moy_temp = (potentiometreLineaire[-1] + thermistance[-1])/2
-    if moy_temp < 0 or moy_temp > 85 :
-        print("Erreur 1.1 : capteurs hors du seuil de fonctionnement car la température est de", moy_temp)
-    if moy_temp < -19 or moy_temp > 70 :
-        print("Erreur 1.2 : antenne hors du seuil de fonctionnement car la température est de", moy_temp)
-
+    moy_temperature = (temperatureSenKy052[-1] + thermistance[-1])/2
+    if moy_temperature < 0 or moy_temperature > 85 :
+        print("Erreur 1.1 : capteurs hors du seuil de fonctionnement car la température est de", moy_temperature)
+    if moy_temperature < -19 or moy_temperature > 70 :
+        print("Erreur 1.2 : antenne hors du seuil de fonctionnement car la température est de", moy_temperature)
+    moy_pression = (capteurPression[-1] + pressionSenKy052[-1])/2
+    if moy_pression < 30 or moy_pression > 110 :
+        print("Erreur 2.1 : capteur BMP280 KY052 hors du seuil de fonctionnement car la pression est de", moy_pression)
+    if moy_pression < 15 or moy_pression > 115 :
+        print("Erreur 2.2 : capteur MPX4115 hors du seuil de fonctionnement car la pression est de", moy_temp)
 
 fichier.close()  # Fermeture du fichier
 
