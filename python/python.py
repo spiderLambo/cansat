@@ -61,6 +61,13 @@ while continuer:
         f"{compteur};{thermistance[-1]};{potentiometreLineaire[-1]};{capteurDistance[-1]};{capteurPression[-1]};{pressionSenKy052[-1]};{temperatureSenKy052[-1]}\n"
     )
 
+    # messages d'erreur
+    moy_temp = (potentiometreLineaire[-1] + thermistance[-1])/2
+    if moy_temp < 0 or moy_temp > 85 :
+        print("Erreur 1.1 : capteurs hors du seuil de fonctionnement car la température est de", moy_temp)
+    if moy_temp < -19 or moy_temp > 70 :
+        print("Erreur 1.2 : antenne hors du seuil de fonctionnement car la température est de", moy_temp)
+
 
 fichier.close()  # Fermeture du fichier
 
