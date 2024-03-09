@@ -22,6 +22,8 @@ fichier.truncate()
 ) = ([], [], [], [], [], [], [])
 continuer = True
 compteur = 0
+moy_temperature = 20
+moy_pression = 101
 
 
 def point_virgules(chaine_de_caracteres):
@@ -71,7 +73,7 @@ while continuer:
     if moy_pression < 30 or moy_pression > 110 :
         print("Erreur 2.1 : capteur BMP280 KY052 hors du seuil de fonctionnement car la pression est de", moy_pression)
     if moy_pression < 15 or moy_pression > 115 :
-        print("Erreur 2.2 : capteur MPX4115 hors du seuil de fonctionnement car la pression est de", moy_temp)
+        print("Erreur 2.2 : capteur MPX4115 hors du seuil de fonctionnement car la pression est de", moy_pression)
 
 fichier.close()  # Fermeture du fichier
 
