@@ -3,11 +3,7 @@
 #include <SPI.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP280.h>
-
-const int BMP_SCK = 13;
-const int BMP_MISO = 12;
-const int BMP_MOSI = 11;
-const int BMP_CS = 10;
+#include <Servo.h>
 
 Adafruit_BMP280 bmp; // I2C
 //Adafruit_BMP280 bmp(BMP_CS); // hardware SPI
@@ -15,7 +11,12 @@ Adafruit_BMP280 bmp; // I2C
 
 
 // Définition des pins
-const int pinDist = 3;
+const float pinThermistance = A0;
+const float pinPotentiometreLineaire = A1;
+const int pinServomoteur = 4;
+const int pinDistance = 3;
+const float pinCapteurPression = A2;
+const int pinServomoteur = 4;
 
 
 // Variables utiles
@@ -27,19 +28,19 @@ float pressionSenKy052;
 float temperatureSenKy052;
 int continuer = 1;
 
+Servo myservo;  // create servo object to control a servo
+
 void setup() {
   // initalistaion des pins
   pinMode(pinDist, INPUT);
+  myservo.attach(pinServomoteur);  // attaches the servo on pin 4 to the servo object
+  int pos = 0;    // variable to store the servo position
 
   Serial.begin(9600); // Ouverture du moniteur série
 
   // code géré par la librairie
   Serial.println(F("BMP280 test"));
 
-  if (!bmp.begin()) {
-    Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
-    while (1);
-  }
 }
 
 void loop() {
@@ -59,10 +60,10 @@ void loop() {
 
 void codePrincipal(){
   // Récupératon des données par les capteurs
-  thermistance = 68.8 - (0.0865*analogRead(A0));
-  potentiometreLineaire = analogRead(A1);
+  thermistance = 68.8 - (0.0865*analogRead(pinThermistance));
+  potentiometreLineaire = analogRead(pinPotentiometreLineaire);
   capteurDistance = digitalRead(pinDist);
-  capteurPression = analogRead(A2);
+  capteurPression = analogRead(pinCapteurPression);
   pressionSenKy052 = bmp.readPressure();
   temperatureSenKy052 = bmp.readTemperature();
 
@@ -91,5 +92,7 @@ void stopData(){
 }
 
 void servomoteur(){
-  // code du servomoteur ici
+  for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees in steps of 1 degree
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
 }
