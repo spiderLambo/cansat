@@ -14,9 +14,8 @@ Adafruit_BMP280 bmp; // I2C
 const float pinThermistance = A0;
 const float pinPotentiometreLineaire = A1;
 const int pinServomoteur = 4;
-const int pinDistance = 3;
+const int pinCapteurDistance = 3;
 const float pinCapteurPression = A2;
-const int pinServomoteur = 4;
 
 
 // Variables utiles
@@ -32,14 +31,12 @@ Servo myservo;  // create servo object to control a servo
 
 void setup() {
   // initalistaion des pins
-  pinMode(pinDist, INPUT);
+  pinMode(pinCapteurDistance, INPUT);
+  
   myservo.attach(pinServomoteur);  // attaches the servo on pin 4 to the servo object
   int pos = 0;    // variable to store the servo position
 
   Serial.begin(9600); // Ouverture du moniteur série
-
-  // code géré par la librairie
-  Serial.println(F("BMP280 test"));
 
 }
 
@@ -62,7 +59,7 @@ void codePrincipal(){
   // Récupératon des données par les capteurs
   thermistance = 68.8 - (0.0865*analogRead(pinThermistance));
   potentiometreLineaire = analogRead(pinPotentiometreLineaire);
-  capteurDistance = digitalRead(pinDist);
+  capteurDistance = digitalRead(pinCapteurDistance);
   capteurPression = analogRead(pinCapteurPression);
   pressionSenKy052 = bmp.readPressure();
   temperatureSenKy052 = bmp.readTemperature();
