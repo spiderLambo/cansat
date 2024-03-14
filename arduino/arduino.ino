@@ -14,7 +14,7 @@ Adafruit_BMP280 bmp; // I2C
 const float pinThermistance = A0;
 const float pinPotentiometreLineaire = A1;
 const int pinServomoteur = 4;
-const int pinCapteurDistance = 3;
+const uint8_t pinCapteurDistance = 3;
 const float pinCapteurPression = A2;
 
 // Variables utiles
@@ -60,7 +60,7 @@ void codePrincipal(){
   // Récupératon des données par les capteurs
   thermistance = 68.8 - (0.0865*analogRead(pinThermistance));
   potentiometreLineaire = analogRead(pinPotentiometreLineaire);
-  capteurDistance = digitalRead(pinCapteurDistance);
+  capteurDistance = = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;;
   capteurPression = analogRead(pinCapteurPression);
   pressionSenKy052 = bmp.readPressure();
   temperatureSenKy052 = bmp.readTemperature();
