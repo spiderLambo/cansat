@@ -17,7 +17,6 @@ const int pinServomoteur = 4;
 const int pinCapteurDistance = 3;
 const float pinCapteurPression = A2;
 
-
 // Variables utiles
 float thermistance;
 float potentiometreLineaire;
@@ -27,16 +26,16 @@ float pressionSenKy052;
 float temperatureSenKy052;
 int continuer = 1;
 int data;
-int pos;
+int angleTourn;    // angle que le servomoteur tourne
 
-Servo myservo;  // create servo object to control a servo
+Servo myservo;  //creation d'un objet pour controller le servomoteur (voir bibliothèque Servo.h)
 
 void setup() {
   // initalistaion des pins
   pinMode(pinCapteurDistance, INPUT);
   
-  myservo.attach(pinServomoteur);  // attaches the servo on pin 4 to the servo object
-  int pos = 0;    // variable to store the servo position
+  myservo.attach(pinServomoteur);  // attacher le servomoteur au pin 4 pour l'oject servo
+  int angleTour = 90;    // angle que le servomoteur tourne
 
   Serial.begin(9600); // Ouverture du moniteur série
 
@@ -91,8 +90,6 @@ void stopData(){
 }
 
 void servomoteur(){
-  for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees in steps of 1 degree
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
+    myservo.write(angleTourn);              // tell servo to go to position in variable 'post
   }
 }
