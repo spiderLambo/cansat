@@ -5,6 +5,4 @@ utilisation de :
     pyserial
     matplotlib
       pyplot
-  qtcreator
-    qdebug
-    seriallink
+    keyboard
