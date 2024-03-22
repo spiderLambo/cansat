@@ -95,8 +95,3 @@ void loop() {
   atterissage = -500;
  }
 }
-
-
-void servomoteur(){
-    myservo.write(angleTourn);              // tell servo to go to position in variable 'post
-  }
