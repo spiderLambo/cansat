@@ -1,8 +1,8 @@
 utilisation de :
-  arduino
-    adafruit
-  python
-    pyserial
-    matplotlib
-      pyplot
-    keyboard
+arduino
+	adafruit
+python
+	pyserial
+	matplotlib
+		pyplot
+	pygames
