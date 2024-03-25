@@ -57,7 +57,7 @@ void loop() {
  
   // Récupératon des données par les capteurs
   thermistance = - 68.8 + (0.0865*analogRead(pinThermistance));
-  potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0,07039084;
+  potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0,0703;
   capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
   pressionSenKy052 =  bmp.readPressure()*pow(10,-3);
@@ -66,7 +66,7 @@ void loop() {
 
 
   // Affichage des données dans le moniteur série
-  // Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);continuer
+  // Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)
   Serial.print(thermistance);
   Serial.print(";");
   Serial.print(potentiometreLineaire);
