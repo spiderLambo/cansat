@@ -80,15 +80,14 @@ void loop() {
   Serial.print(temperatureSenKy052);
   Serial.print(";");
   Serial.print(distanceSenKy052);
-  Serial.println(";");
+  Serial.print(";");
 
   delay(1000); // Toutes les secondes
 
 // activation de servomoteur
-  deltaltitude = distanceSenKy052*10 - bmp.readAltitude(1013.25)*10;
- if (deltaltitude == 0) {
+  deltaltitude = bmp.readAltitude(1013.25) - 40;  //mettre l'altidude du sol sur lequel on doit atterir
+ if (deltaltitude  < 2) {
   atterissage = atterissage+1;
-  Serial.println(atterissage);
  }
  if (atterissage == 10) {
   myservo.write(angleTourn);              // tell servo to go to position in variable 'post
