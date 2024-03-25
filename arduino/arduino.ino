@@ -57,7 +57,7 @@ void loop() {
  
   // Récupératon des données par les capteurs
   thermistance = - 68.8 + (0.0865*analogRead(pinThermistance));
-  potentiometreLineaire = analogRead(pinPotentiometreLineaire);
+  potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0,07039084;
   capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
   pressionSenKy052 =  bmp.readPressure()*pow(10,-3);
