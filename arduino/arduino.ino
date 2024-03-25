@@ -50,6 +50,12 @@ void setup() {
     while (1);
   }
 
+  while (((pulseIn(pinCapteurDistance, HIGH) - 100)* 4) < 20 ) {   //mettre la hauteur des pieds de la cannette de la canette à la place du 20
+    digitalWrite(led, LOW) ;
+    delay(500);
+    digitalWrite(led, HIGH) ;
+    delay(500);
+  }
 
 }
 
