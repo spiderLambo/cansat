@@ -20,6 +20,7 @@ const float pinPotentiometreLineaire = A1;
 const int pinServomoteur = 4;
 const uint8_t pinCapteurDistance = 3;
 const float pinCapteurPression = A2;
+const int led = 5;
 
 // Variables utiles
 float thermistance;
@@ -29,7 +30,7 @@ float capteurPression;
 float pressionSenKy052;
 float temperatureSenKy052;
 float distanceSenKy052;
-int angleTourn;    // angle que le servomoteur tourne
+int angleTourn = 90;    // angle que le servomoteur tourne
 int deltaltitude;
 int atterissage;  //pour savoir si le CanSat a attérit
 
@@ -38,18 +39,23 @@ Servo myservo;  //creation d'un objet pour controller le servomoteur (voir bibli
 void setup() {
   // initalistaion des pins
   pinMode(pinCapteurDistance, INPUT);
-  digitalWrite(5, HIGH) ; //allumage led
+  digitalWrite(led, HIGH) ; //allumage led
   
   myservo.attach(pinServomoteur);  // attacher le servomoteur au pin 4 pour l'oject servo
-  int angleTour = 90;    // angle que le servomoteur tourne
 
   Serial.begin(9600); // Ouverture du moniteur série
 
   if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas 
-  Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
-  while (1);
+    Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
+    while (1);
   }
 
+  while (((pulseIn(pinCapteurDistance, HIGH) - 100)* 4) < 20 ) {   //mettre la hauteur des pieds de la cannette de la canette à la place du 20
+    digitalWrite(led, LOW) ;
+    delay(500);
+    digitalWrite(led, HIGH) ;
+    delay(500);
+  }
 
 }
 
@@ -57,7 +63,7 @@ void loop() {
  
   // Récupératon des données par les capteurs
   thermistance = - 68.8 + (0.0865*analogRead(pinThermistance));
-  potentiometreLineaire = analogRead(pinPotentiometreLineaire);
+  potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0,0703;
   capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
   pressionSenKy052 =  bmp.readPressure()*pow(10,-3);
@@ -66,7 +72,7 @@ void loop() {
 
 
   // Affichage des données dans le moniteur série
-  // Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);continuer
+  // Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)
   Serial.print(thermistance);
   Serial.print(";");
   Serial.print(potentiometreLineaire);
@@ -80,15 +86,14 @@ void loop() {
   Serial.print(temperatureSenKy052);
   Serial.print(";");
   Serial.print(distanceSenKy052);
-  Serial.println(";");
+  Serial.print(";");
 
   delay(1000); // Toutes les secondes
 
 // activation de servomoteur
-  deltaltitude = distanceSenKy052*10 - bmp.readAltitude(1013.25)*10;
- if (deltaltitude == 0) {
+  deltaltitude = bmp.readAltitude(1013.25) - 40;  //mettre l'altidude du sol sur lequel on doit atterir
+ if (deltaltitude  < 2) {
   atterissage = atterissage+1;
-  Serial.println(atterissage);
  }
  if (atterissage == 10) {
   myservo.write(angleTourn);              // tell servo to go to position in variable 'post
