@@ -2,7 +2,7 @@ utilisation de :
 arduino
 	adafruit
 python
-	pyserial
-	matplotlib
+	pyserial 
+	matplotlib (installé)
 		pyplot
-	pygames
+	pygames (installé)
