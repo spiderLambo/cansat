@@ -67,7 +67,7 @@ void loop() {
   capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
   pressionSenKy052 =  bmp.readPressure()*pow(10,-3);
-  temperatureSenKy052 = bmp.readTemperature() - 5; //le -5 certe à étaloner le résultat
+  temperatureSenKy052 = bmp.readTemperature(); 
   distanceSenKy052 = bmp.readAltitude(1013.25); // this should be adjusted to your local forcase
 
 
