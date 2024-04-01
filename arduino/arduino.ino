@@ -64,7 +64,7 @@ void setup() {
 void loop() {
  
   // Récupératon des données par les capteurs
-  thermistance = - 68.8 + (0.0865*analogRead(pinThermistance));
+  thermistance = 132 + (analogRead(pinThermistance)*-0.417);
   potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0.0703;
   capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
