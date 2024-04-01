@@ -94,7 +94,7 @@ void loop() {
   delay(1000); // Toutes les secondes
 
 // activation de servomoteur
-  deltaltitude = bmp.readAltitude(1013.25) - 40;  //mettre l'altidude du sol sur lequel on doit atterir
+  deltaltitude = bmp.readAltitude(1013.25) - 190;  //mettre l'altidude du sol sur lequel on doit atterir
  if (deltaltitude  < 2) {
   atterissage = atterissage+1;
  }
