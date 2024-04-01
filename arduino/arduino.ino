@@ -30,7 +30,7 @@ float capteurPression;
 float pressionSenKy052;
 float temperatureSenKy052;
 float distanceSenKy052;
-int angleTourn = 90;    // angle que le servomoteur tourne
+int angleTourn = 180;    // angle que le servomoteur tourne
 int deltaltitude;
 int atterissage;  //pour savoir si le CanSat a attérit
 
@@ -44,6 +44,7 @@ void setup() {
   digitalWrite(pinThermistance, HIGH);
   
   myservo.attach(pinServomoteur);  // attacher le servomoteur au pin 4 pour l'oject servo
+  myservo.write(0); 
 
   Serial.begin(9600); // Ouverture du moniteur série
 
