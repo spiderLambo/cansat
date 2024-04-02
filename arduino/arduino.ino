@@ -25,7 +25,7 @@ const int led = 5;
 // Variables utiles
 float thermistance;
 float potentiometreLineaire;
-float capteurDistance;
+float capteurDistance = 0;
 float capteurPression;
 float pressionSenKy052;
 float temperatureSenKy052;
@@ -52,18 +52,18 @@ if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas
     Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
     while (1);
   }
-
-
 }
 
 void loop() {
-    capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
-  while ((capteurDistance < 20 or capteurDistance == 'ovf') and lancement == 0) {   //mettre la hauteur des pieds de la cannette de la canette à la place du 20
+  
+  capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
+  while (capteurDistance < 50 and lancement == 0) {   //mettre la hauteur des pieds de la canette à la place du 20
     capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
     digitalWrite(led, LOW) ;
     delay(500);
     digitalWrite(led, HIGH) ;
     delay(500);
+    Serial.print(lancement);
   }
   
  lancement = 1;
