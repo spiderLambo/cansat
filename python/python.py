@@ -4,7 +4,7 @@ import serial
 import pygame as pgm
 
 portserie = serial.Serial(
-    port="COM4", baudrate=9600, timeout=1
+    port="COM5", baudrate=9600, timeout=1
 )  # Ouverture du portserie
 pgm.init()  # Initialisation de la fenetre
 

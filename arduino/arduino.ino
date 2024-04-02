@@ -33,7 +33,7 @@ float distanceSenKy052;
 int angleTourn = 180;    // angle que le servomoteur tourne
 int deltaltitude;
 int atterissage;  //pour savoir si le CanSat a attérit
-
+int lancement = 0; //savoir si le CanSat a été lancé ou non (0--> non lancé / 1--> lancée) 
 Servo myservo;  //creation d'un objet pour controller le servomoteur (voir bibliothèque Servo.h)
 
 void setup() {
@@ -53,16 +53,20 @@ if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas
     while (1);
   }
 
-  while (((pulseIn(pinCapteurDistance, HIGH) - 100)* 4) < 20 ) {   //mettre la hauteur des pieds de la cannette de la canette à la place du 20
+
+}
+
+void loop() {
+    capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
+  while ((capteurDistance < 20 or capteurDistance == 'ovf') and lancement == 0) {   //mettre la hauteur des pieds de la cannette de la canette à la place du 20
+    capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
     digitalWrite(led, LOW) ;
     delay(500);
     digitalWrite(led, HIGH) ;
     delay(500);
   }
-
-}
-
-void loop() {
+  
+ lancement = 1;
  
   // Récupératon des données par les capteurs
   thermistance = 132 + (analogRead(pinThermistance)*-0.417);
