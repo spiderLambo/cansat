@@ -33,7 +33,6 @@ float distanceSenKy052;
 int angleTourn = 180;    // angle que le servomoteur tourne
 int deltaltitude;
 int atterissage;  //pour savoir si le CanSat a attérit
-int lancement = 0; //savoir si le CanSat a été lancé ou non (0--> non lancé / 1--> lancée) 
 Servo myservo;  //creation d'un objet pour controller le servomoteur (voir bibliothèque Servo.h)
 
 void setup() {
@@ -51,23 +50,21 @@ void setup() {
 if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas 
     Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
     while (1);
-  }
-}
-
-void loop() {
+  }  
   
-  capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
-  while (capteurDistance < 50 and lancement == 0) {   //mettre la hauteur des pieds de la canette à la place du 20
-    capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
+ do {   //mettre la hauteur des pieds de la canette à la place du 20
+    int capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
     digitalWrite(led, LOW) ;
     delay(500);
     digitalWrite(led, HIGH) ;
     delay(500);
-    Serial.print(lancement);
-  }
-  
- lancement = 1;
+    Serial.println(capteurDistance);
+  } while (capteurDistance < 5.0);
  
+}
+
+void loop() {
+
   // Récupératon des données par les capteurs
   thermistance = 132 + (analogRead(pinThermistance)*-0.417);
   potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0.0703;
