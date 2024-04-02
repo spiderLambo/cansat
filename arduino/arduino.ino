@@ -30,7 +30,7 @@ float capteurPression;
 float pressionSenKy052;
 float temperatureSenKy052;
 float distanceSenKy052;
-int angleTourn = 90;    // angle que le servomoteur tourne
+int angleTourn = 180;    // angle que le servomoteur tourne
 int deltaltitude;
 int atterissage;  //pour savoir si le CanSat a attérit
 
@@ -40,8 +40,11 @@ void setup() {
   // initalistaion des pins
   pinMode(pinCapteurDistance, INPUT);
   digitalWrite(led, HIGH) ; //allumage led
+  pinMode(pinThermistance, INPUT);
+  digitalWrite(pinThermistance, HIGH);
   
   myservo.attach(pinServomoteur);  // attacher le servomoteur au pin 4 pour l'oject servo
+  myservo.write(0); 
 
   Serial.begin(9600); // Ouverture du moniteur série
 
@@ -62,12 +65,12 @@ void setup() {
 void loop() {
  
   // Récupératon des données par les capteurs
-  thermistance = - 68.8 + (0.0865*analogRead(pinThermistance));
-  potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0,0703;
+  thermistance = 132 + (analogRead(pinThermistance)*-0.417);
+  potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0.0703;
   capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
   pressionSenKy052 =  bmp.readPressure()*pow(10,-3);
-  temperatureSenKy052 = bmp.readTemperature() - 5; //le -5 certe à étaloner le résultat
+  temperatureSenKy052 = bmp.readTemperature(); 
   distanceSenKy052 = bmp.readAltitude(1013.25); // this should be adjusted to your local forcase
 
 
@@ -91,7 +94,7 @@ void loop() {
   delay(1000); // Toutes les secondes
 
 // activation de servomoteur
-  deltaltitude = bmp.readAltitude(1013.25) - 40;  //mettre l'altidude du sol sur lequel on doit atterir
+  deltaltitude = bmp.readAltitude(1013.25) - 190;  //mettre l'altidude du sol sur lequel on doit atterir
  if (deltaltitude  < 2) {
   atterissage = atterissage+1;
  }
