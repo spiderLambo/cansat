@@ -45,11 +45,11 @@ void setup() {
 
   Serial.begin(9600); // Ouverture du moniteur série
 
-  if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas 
+/*  if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas 
     Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
     while (1);
   }
-
+*/
   while (((pulseIn(pinCapteurDistance, HIGH) - 100)* 4) < 20 ) {   //mettre la hauteur des pieds de la cannette de la canette à la place du 20
     digitalWrite(led, LOW) ;
     delay(500);
