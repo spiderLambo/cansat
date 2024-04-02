@@ -48,11 +48,11 @@ void setup() {
 
   Serial.begin(9600); // Ouverture du moniteur série
 
-/*  if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas 
+if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas 
     Serial.println(F("Could not find a valid BMP280 sensor, check wiring!"));
     while (1);
   }
-*/
+
   while (((pulseIn(pinCapteurDistance, HIGH) - 100)* 4) < 20 ) {   //mettre la hauteur des pieds de la cannette de la canette à la place du 20
     digitalWrite(led, LOW) ;
     delay(500);
@@ -89,12 +89,12 @@ void loop() {
   Serial.print(temperatureSenKy052);
   Serial.print(";");
   Serial.print(distanceSenKy052);
-  Serial.print(";");
+  Serial.println(";");
 
   delay(1000); // Toutes les secondes
 
 // activation de servomoteur
-  deltaltitude = bmp.readAltitude(1013.25) - 190;  //mettre l'altidude du sol sur lequel on doit atterir
+  deltaltitude = bmp.readAltitude(1013.25) - 120;  //mettre l'altidude du sol sur lequel on doit atterir
  if (deltaltitude  < 2) {
   atterissage = atterissage+1;
  }
