@@ -9,7 +9,7 @@ portserie = serial.Serial(
 pgm.init()  # Initialisation de la fenetre
 
 # Création du fichier csv
-fichier = open("valeurs.csv", "w")
+fichier = open("resultats/valeurs.csv", "w")
 fichier.truncate()
 
 # Variables utiles
@@ -40,7 +40,7 @@ def graph(temps, grandeur, lab, nom):
 
 # Entête du fichier CSV
 fichier.write(
-    "Temps (en s);Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)\n"
+    "Temps (en s);Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en hPa);Pression du capteur SEN KY052(en hPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)\n"
 )
 
 # Lancement de la fenetre
@@ -59,6 +59,7 @@ while run:
 
         # vraiables à changer à chaque tour de la boucle
         donnees_arduino = portserie.readline().decode("ascii")
+        # donnees_arduino = portserie.readlines().decode("ascii")
         compteur += 1
 
         fragment = donnees_arduino.split(";")  # index des points virgules
@@ -111,7 +112,7 @@ pgm.quit()  # Fermeture de la fenetre
 graph(time, thermistance, "Température (°C)", "Thermistance")
 graph(time, potentiometreLineaire, "Potentiometre Lineaire", "Potentiometre linéaire")
 graph(time, capteurDistance, "Distance (m)", "Capteur de distance")
-graph(time, capteurPression, "Pression (kPa)", "Capteur de pression")
-graph(time, pressionSenKy052, "Pression (kPa)", "Capteur de pression SEN-KY052")
+graph(time, capteurPression, "Pression (hPa)", "Capteur de pression")
+graph(time, pressionSenKy052, "Pression (hPa)", "Capteur de pression SEN-KY052")
 graph(time, temperatureSenKy052, "Temperature (°C)", "Capteur de temperature SEN-KY052")
 graph(time, distanceSenKy052, "Distance (m)", "Capteur de distance SEN-KY052")
