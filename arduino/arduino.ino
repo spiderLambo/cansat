@@ -66,17 +66,17 @@ if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas
 void loop() {
 
   // Récupératon des données par les capteurs
-  thermistance = 132 + (analogRead(pinThermistance)*-0.417);
-  potentiometreLineaire = analogRead(pinPotentiometreLineaire)*0.0703;
-  int capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
+  thermistance = 141 + (analogRead(pinThermistance)*-0.417);
+  potentiometreLineaire = -analogRead(pinPotentiometreLineaire)*0.0703+71.92;
+  int16_t capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
-  pressionSenKy052 =  bmp.readPressure()*pow(10,-3);
+  pressionSenKy052 =  bmp.readPressure()*pow(10,-2)+10;
   temperatureSenKy052 = bmp.readTemperature(); 
   distanceSenKy052 = bmp.readAltitude(1013.25); // this should be adjusted to your local forcase
 
 
   // Affichage des données dans le moniteur série
-  // Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)
+  // Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en hPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)
   Serial.print(thermistance);
   Serial.print(";");
   Serial.print(potentiometreLineaire);
