@@ -69,7 +69,7 @@ void loop() {
   thermistance = 135 + (analogRead(pinThermistance)*-0.417);
   potentiometreLineaire = -analogRead(pinPotentiometreLineaire)*0.0703+71.92;
   int16_t capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
-  capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
+  capteurPression = ((analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456) * 10;
   pressionSenKy052 =  bmp.readPressure()*pow(10,-2)+10;
   temperatureSenKy052 = bmp.readTemperature(); 
   distanceSenKy052 = bmp.readAltitude(1013.25); // this should be adjusted to your local forcase
