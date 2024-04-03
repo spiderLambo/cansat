@@ -52,15 +52,15 @@ if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas
     while (1);
   }  
   
-/* do {   //mettre la hauteur des pieds de la canette à la place du 20
-    int capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 2;
-    digitalWrite(led, LOW) ;
-    delay(500);
-    digitalWrite(led, HIGH) ;
-    delay(500);
-    Serial.println(capteurDistance);
-  } while (capteurDistance ==0);
- */
+int16_t capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
+while (capteurDistance < 0){
+  digitalWrite(led, LOW) ;
+  delay(500);
+  digitalWrite(led, HIGH) ;
+  delay(500);
+  int16_t capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
+}
+  
 }
 
 void loop() {
@@ -69,7 +69,7 @@ void loop() {
   thermistance = 135 + (analogRead(pinThermistance)*-0.417);
   potentiometreLineaire = -analogRead(pinPotentiometreLineaire)*0.0703+71.92;
   int16_t capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
-  capteurPression = ((analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456) * 10;
+  capteurPression = (((analogRead(pinCapteurPression) * (5.1 / 1023.0))/5)+ 0.095)/0.0009;
   pressionSenKy052 =  bmp.readPressure()*pow(10,-2)+10;
   temperatureSenKy052 = bmp.readTemperature(); 
   distanceSenKy052 = bmp.readAltitude(1013.25); // this should be adjusted to your local forcase
