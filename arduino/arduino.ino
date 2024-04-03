@@ -89,8 +89,7 @@ void loop() {
   Serial.print(";");
   Serial.print(temperatureSenKy052);
   Serial.print(";");
-  Serial.print(distanceSenKy052);
-  Serial.println(";");
+  Serial.println(distanceSenKy052);
 
   delay(1000); // Toutes les secondes
 
