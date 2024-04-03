@@ -66,7 +66,7 @@ if (!bmp.begin()) { // a garder sinon capteur SenSy052 ne fonctionne pas
 void loop() {
 
   // Récupératon des données par les capteurs
-  thermistance = 141 + (analogRead(pinThermistance)*-0.417);
+  thermistance = 135 + (analogRead(pinThermistance)*-0.417);
   potentiometreLineaire = -analogRead(pinPotentiometreLineaire)*0.0703+71.92;
   int16_t capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
   capteurPression = (analogRead(pinCapteurPression)* (5.0 / 1023.0) + 0.04845) / 0.0456;
