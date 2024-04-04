@@ -58,7 +58,7 @@ while (capteurDistance < 0){
   delay(500);
   digitalWrite(led, HIGH) ;
   delay(500);
-  int16_t capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
+  capteurDistance = (pulseIn(pinCapteurDistance, HIGH) - 1000) * 4;
 }
   
 }
