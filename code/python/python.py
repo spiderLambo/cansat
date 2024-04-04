@@ -25,7 +25,6 @@ TAILLE = (300, 0)  # Taille de la fenetre
     distanceSenKy052,
 ) = ([], [], [], [], [], [], [], [])
 compteur = 0
-moy_temperature, moy_pression = 20, 101
 
 
 # Fonction pour faire un graphique pour chaque grandeur
