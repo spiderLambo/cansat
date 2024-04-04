@@ -1,8 +1,17 @@
-#### utilisation de :
+#### Utilisation de :
+
 - arduino
-	- adafruit
+  - adafruit
 - python
-	- pyserial 
-	- matplotlib (installé)
-		- pyplot
-	- pygames (installé)
+  - pyserial
+  - matplotlib
+    - pyplot
+  - pygames
+
+#### Utilisation dans le programme de secour de :
+
+- arduino
+  - adafruit
+- python
+  - matplotlib
+    - pyplot
