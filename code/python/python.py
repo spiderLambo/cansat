@@ -4,7 +4,7 @@ import serial
 import pygame as pgm
 
 portserie = serial.Serial(
-    port="COM4", baudrate=9600, timeout=1
+    port="COM5", baudrate=9600, timeout=1
 )  # Ouverture du portserie
 pgm.init()  # Initialisation de la fenetre
 
@@ -59,7 +59,7 @@ while run:
 
         # vraiables à changer à chaque tour de la boucle
         donnees_arduino = portserie.readline().decode("ascii")
-        # donnees_arduino = portserie.readlines().decode("ascii")
+        print(donnees_arduino)
         compteur += 1
 
         fragment = donnees_arduino.split(";")  # index des points virgules
@@ -78,30 +78,6 @@ while run:
         fichier.write(
             f"{compteur};{thermistance[-1]};{potentiometreLineaire[-1]};{capteurDistance[-1]};{capteurPression[-1]};{pressionSenKy052[-1]};{temperatureSenKy052[-1]};{distanceSenKy052[-1]}\n"
         )
-
-        # messages d'erreur
-        # moy_temperature = (temperatureSenKy052[-1] + thermistance[-1]) / 2
-        # if moy_temperature < 0 or moy_temperature > 85:
-        #     print(
-        #         "Erreur 1.1 : capteurs hors du seuil de fonctionnement car la température est de",
-        #         moy_temperature,
-        #     )
-        # if moy_temperature < -19 or moy_temperature > 70:
-        #     print(
-        #         "Erreur 1.2 : antenne hors du seuil de fonctionnement car la température est de",
-        #         moy_temperature,
-        #     )
-        # moy_pression = (capteurPression[-1] + pressionSenKy052[-1]) / 2
-        # if moy_pression < 30 or moy_pression > 110:
-        #     print(
-        #         "Erreur 2.1 : capteur BMP280 KY052 hors du seuil de fonctionnement car la pression est de",
-        #         moy_pression,
-        #     )
-        # if moy_pression < 15 or moy_pression > 115:
-        #     print(
-        #         "Erreur 2.2 : capteur MPX4115 hors du seuil de fonctionnement car la pression est de",
-        #         moy_pression,
-        #     )
 
 
 fichier.close()  # Fermeture du fichier
