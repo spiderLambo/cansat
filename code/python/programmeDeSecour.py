@@ -45,6 +45,10 @@ for ligne in moniteur_serie.readlines():
     compteur += 1
 
     fragment = ligne.split(";")  # index des points virgules
+    
+    # interpretation des nan
+    if 'nan' in fragment:
+        fragment = [(element if element != 'nan' else 0) for element in fragment]
 
     # mise à jour des listes
     time.append(compteur)
@@ -55,6 +59,15 @@ for ligne in moniteur_serie.readlines():
     pressionSenKy052.append(fragment[4])
     temperatureSenKy052.append(fragment[5])
     distanceSenKy052.append(fragment[6])
+    
+    # Conversion en entier
+    thermistance = [float(element) for element in thermistance]
+    potentiometreLineaire = [float(element) for element in potentiometreLineaire]
+    capteurDistance = [float(element) for element in capteurDistance]
+    capteurPression = [float(element) for element in capteurPression]
+    temperatureSenKy052 = [float(element) for element in temperatureSenKy052]
+    pressionSenKy052 = [float(element) for element in pressionSenKy052]
+    distanceSenKy052 = [float(element) for element in distanceSenKy052]
 
     # écriture sur le fichier csv
     fichier.write(

@@ -75,5 +75,3 @@ while run:
         sleep(1)
 
 pgm.quit()  # Fermeture de la fenetre
-s
-s
