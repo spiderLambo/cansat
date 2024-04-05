@@ -44,7 +44,6 @@ fichier.write(
 for ligne in moniteur_serie.readlines():
     compteur += 1
 
-    print(ligne)
     fragment = ligne.split(";")  # index des points virgules
 
     # mise à jour des listes
@@ -63,9 +62,9 @@ for ligne in moniteur_serie.readlines():
     )
 
 
-
+# Fermeture du fichier
 moniteur_serie.close()
-fichier.close()  # Fermeture du fichier
+fichier.close()
 
 
 # Création des graphiques
