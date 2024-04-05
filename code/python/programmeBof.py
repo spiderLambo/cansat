@@ -45,6 +45,10 @@ def changer_fenetre(valA, valB, valC, mouse):
     mouse.press(Button.left)
     mouse.release(Button.left)
 
+    mouse.move(valC[0], valC[1])
+    mouse.press(Button.left)
+    mouse.release(Button.left)
+
 
 # Lancement de la fenetre
 screen = pgm.display.set_mode(TAILLE)
@@ -68,18 +72,7 @@ while run:
 
         compteur += 1
 
-        sleep(1def changer_fenetre(valA, valB, valC, mouse):
-    mouse.move(valA[0], valA[1])
-    mouse.press(Button.left)
-    mouse.release(Button.left)
-
-    mouse.move(valB[0], valB[1])
-    mouse.press(Button.left)
-    mouse.release(Button.left)
-
-    mouse.move(valC[0], valC[1])
-    mouse.press(Button.left)
-    mouse.release(Button.left))
+        sleep(1)
 
 pgm.quit()  # Fermeture de la fenetre
 s
