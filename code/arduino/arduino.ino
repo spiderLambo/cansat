@@ -94,11 +94,11 @@ void loop() {
   delay(1000); // Toutes les secondes
 
 // activation de servomoteur
-  deltaltitude = bmp.readAltitude(1013.25) - 120;  //mettre l'altidude du sol sur lequel on doit atterir
- if (deltaltitude  < 2) {
+  deltaltitude = bmp.readAltitude(1013.25) - 86;  //mettre l'altidude du sol sur lequel on doit atterir
+ if (deltaltitude  < 5) {
   atterissage = atterissage+1;
  }
- if (atterissage == 10) {
+ if (atterissage == 15) {
   myservo.write(angleTourn);              // tell servo to go to position in variable 'post
   atterissage = -500;
  }

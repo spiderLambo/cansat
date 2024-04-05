@@ -36,7 +36,7 @@ def graph(temps, grandeur, lab, nom):
 
 # Entête du fichier CSV
 fichier.write(
-    "Temps (en s);Temperature (en *C);Valeur du potentiometre lineaire;Distance (en m);Pression (en kPa);Pression du capteur SEN KY052(en kPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)\n"
+    "Temps (en s);Temperature (en *C);Distance du potentiometre lineaire (en mm);Distance (en m);Pression (en hPa);Pression du capteur SEN KY052(en hPa);Temperature du capteur SEN KY052(en *C);Distance du capteur SEN KY052(en m)\n"
 )
 
 
@@ -82,9 +82,9 @@ fichier.close()
 
 # Création des graphiques
 graph(time, thermistance, "Température (°C)", "Thermistance")
-graph(time, potentiometreLineaire, "Potentiometre Lineaire", "Potentiometre linéaire")
-graph(time, capteurDistance, "Distance (m)", "Capteur de distance")
-graph(time, capteurPression, "Pression (kPa)", "Capteur de pression")
-graph(time, pressionSenKy052, "Pression (kPa)", "Capteur de pression SEN-KY052")
-graph(time, temperatureSenKy052, "Temperature (°C)", "Capteur de temperature SEN-KY052")
-graph(time, distanceSenKy052, "Distance (m)", "Capteur de distance SEN-KY052")
+graph(time, potentiometreLineaire, "Distance (mm) Potentiometre linéaire", "Potentiometre linéaire")
+graph(time, capteurDistance, "Distance (mm)", "Capteur de distance")
+graph(time, capteurPression, "Pression (hPa)", "Capteur de pression")
+graph(time, pressionSenKy052, "Pression (hPa) SEN-KY052", "Capteur de pression SEN-KY052")
+graph(time, temperatureSenKy052, "Temperature (°C) SEN-KY052", "Capteur de temperature SEN-KY052")
+graph(time, distanceSenKy052, "Distance (m) SEN-KY052", "Capteur de distance SEN-KY052")
